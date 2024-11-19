@@ -1,49 +1,24 @@
-// src/components/SignIn.js
-import React, { useState, useContext } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { UserContext } from '../contexts/UserContext';
-import './Auth.css';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
+import './AuthPage.css';
 
-const SignIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const AuthPage = () => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { setUser } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Save the previous page path in local storage
-    localStorage.setItem('prevPath', location.state?.from || '/');
-
-    // Simulate sign-in and set user data
-    const userData = { username: 'JohnDoe', email };
-    setUser(userData);
-
-    // Redirect to the home page or dashboard
-    navigate('/');
+  const handleSignIn = () => {
+    login(); // Mark user as authenticated
+    navigate('/profile'); // Redirect to profile after login
   };
 
   return (
     <div className="auth-container">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Sign In</button>
-      </form>
+      <h1>Welcome!</h1>
+      <p>Please sign in or sign up to access your profile.</p>
+      <button onClick={handleSignIn} className="auth-button">Sign In / Sign Up</button>
     </div>
   );
 };
 
-export default SignIn;
+export default AuthPage;

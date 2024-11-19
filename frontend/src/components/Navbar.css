@@ -30,3 +30,99 @@
   text-decoration: underline;
 }
 
+.navbar-brand-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Dropdown styling */
+.location-dropdown {
+  position: relative;
+}
+
+.location-button {
+  background-color: #c32148;
+  color: #f6f1f1;
+  border: 1px solid #c32148;
+  border-radius: 4px;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.location-button:hover {
+  background-color: #c32148;
+  color: #333;
+}
+
+.location-dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 300px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 15px;
+}
+
+.location-dropdown-menu h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.location-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.location-options button {
+  background-color: #fff;
+  color: #c32148;
+  border: 1px solid #c32148;
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.location-options button:hover {
+  background-color: #c32148;
+  color: white;
+}
+
+.location-input-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.location-input-section input {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.locate-button {
+  background-color: #c32148;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.locate-button:hover {
+  background-color: #e64a19;
+}

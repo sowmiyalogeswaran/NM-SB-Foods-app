@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom'; // Removed Link, only useNavigate is needed
 import './HomePage.css';
 import { CartContext } from '../contexts/CartContext';
 
 const HomePage = () => {
   const { addItemToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const featuredDishes = [
     { id: 1, name: 'Pizza', description: 'A classic favorite with cheesy goodness.', imageUrl: 'https://images3.alphacoders.com/104/thumb-1920-1041781.jpg' },
@@ -24,16 +25,15 @@ const HomePage = () => {
     { id: 6, name: "Steak Frites", description: "Juicy, grilled-to-order steak paired with crispy French fries, topped with herb butter and served with a side of tangy peppercorn sauce.", imageUrl: "https://img.freepik.com/premium-photo/gourmet-temptation-visual-delights-steak-frites_974629-3139.jpg"},
   ];
 
+  const handleAddToCartAndNavigate = (item) => {
+    addItemToCart(item); // Add item to the existing cart
+    navigate('/cart');   // Navigate to the cart page
+  };
+
   return (
     <div className="home-container">
       <header className="home-header">
         <h1>Craving something tasty? Order up, sit back, and let the flavor come to you! 🍕🍣🍔</h1>
-        <img 
-          src="https://thumbs.dreamstime.com/z/tasty-fresh-fried-chicken-burger-fries-social-media-banner-template-264687273.jpg" 
-          alt="Delicious food" 
-          className="featured-image" 
-        />
-        <p>Food ordering has made eating easy and fun! With a few taps, you can explore tons of tasty options, customize your meal just how you like it, and track it on the way to your door. No more cooking or waiting in line—just fresh, delicious food delivered right to you. Whether you're craving a classic pizza, spicy tacos, or a healthy salad, your next meal is just a click away!</p>
       </header>
 
       <div className="cta-section">
@@ -44,7 +44,7 @@ const HomePage = () => {
         </Link>
       </div>
 
-      {/* New Special Offers Section */}
+      {/* Special Offers Section */}
       <section className="special-offers">
         <h2>Special Offers</h2>
         <div className="special-cards">
@@ -53,7 +53,10 @@ const HomePage = () => {
               <img src={offer.imageUrl} alt={offer.name} className="card-image" />
               <h3>{offer.name}</h3>
               <p>{offer.description}</p>
-              <button onClick={() => addItemToCart(offer)} className="add-to-cart-button">
+              <button
+                onClick={() => handleAddToCartAndNavigate(offer)}
+                className="add-to-cart-button"
+              >
                 Add to Cart
               </button>
             </div>
@@ -61,16 +64,18 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Popular Dishes Section */}
       <section className="featured-items">
         <h2>Popular Dishes</h2>
         <div className="featured-cards">
-          {featuredDishes.map(dish => (
+          {featuredDishes.map((dish) => (
             <div className="card" key={dish.id}>
               <img src={dish.imageUrl} alt={dish.name} className="card-image" />
               <h3>{dish.name}</h3>
               <p>{dish.description}</p>
-              <button onClick={() => addItemToCart(dish)} className="add-to-cart-button">
+              <button
+                onClick={() => handleAddToCartAndNavigate(dish)}
+                className="add-to-cart-button"
+              >
                 Add to Cart
               </button>
             </div>

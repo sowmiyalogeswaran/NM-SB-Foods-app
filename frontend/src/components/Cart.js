@@ -9,6 +9,9 @@ const CartPage = () => {
     { id: 3, name: 'Pasta', price: 10.99, quantity: 1 },
   ]);
 
+  // State to control the visibility of the popup
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
   // Function to handle quantity changes
   const handleQuantityChange = (id, delta) => {
     setCartItems(prevItems =>
@@ -21,6 +24,17 @@ const CartPage = () => {
   // Calculate total price
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  };
+
+  // Handle checkout
+  const handleCheckout = () => {
+    setPopupVisible(true); // Show the popup
+    // Additional actions like clearing the cart can be added here
+  };
+
+  // Close popup
+  const closePopup = () => {
+    setPopupVisible(false);
   };
 
   return (
@@ -43,10 +57,24 @@ const CartPage = () => {
       <div className="cart-total">
         <h3>Total: ${calculateTotal()}</h3>
       </div>
-      <button className="checkout-button">Proceed to Checkout</button>
+      <button className="checkout-button" onClick={handleCheckout}>
+        Proceed to Checkout
+      </button>
+
+      {/* Popup */}
+      {isPopupVisible && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <h2>Order Placed!</h2>
+            <p>Thank you for your purchase.</p>
+            <button className="close-popup-button" onClick={closePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default CartPage;
-

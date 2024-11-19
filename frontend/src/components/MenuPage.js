@@ -38,9 +38,11 @@ const MenuPage = () => {
     {
       category: "Beverages",
       dishes: [
-        { id: 10, name: "Iced Matcha Latte", description: "Smooth, earthy matcha blended with milk and poured over ice for a refreshing, energizing drink.", imageUrl: "https://buenprovecho.hn/wp-content/uploads/2023/07/iced-latte-de-matcha.png" },
-        { id: 11, name: "Classic Mojito", description: "A lively mix of fresh mint, lime, sugar, and soda water with a splash of rum for a cool, citrusy cocktail.", imageUrl: "https://th.bing.com/th/id/OIP.YksFMGxWYA_bQDKSNtm8lwHaFL?rs=1&pid=ImgDetMain" },
-        { id: 12, name: "Berry Smoothie", description: "A blend of mixed berries, banana, and yogurt, creating a creamy, fruity drink packed with vitamins.", imageUrl: "https://th.bing.com/th/id/OIP.pbm3pOWgUB4gScI3I9yGBAEuDO?rs=1&pid=ImgDetMain" },
+        { id: 16, name: "Iced Matcha Latte", description: "Smooth, earthy matcha blended with milk and poured over ice for a refreshing, energizing drink.", imageUrl: "https://buenprovecho.hn/wp-content/uploads/2023/07/iced-latte-de-matcha.png" },
+        { id: 17, name: "Classic Mojito", description: "A lively mix of fresh mint, lime, sugar, and soda water with a splash of rum for a cool, citrusy cocktail.", imageUrl: "https://th.bing.com/th/id/OIP.YksFMGxWYA_bQDKSNtm8lwHaFL?rs=1&pid=ImgDetMain" },
+        { id: 18, name: "Berry Smoothie", description: "A blend of mixed berries, banana, and yogurt, creating a creamy, fruity drink packed with vitamins.", imageUrl: "https://th.bing.com/th/id/OIP.pbm3pOWgUB4gScI3I9yGBAEuDO?rs=1&pid=ImgDetMain" },
+        { id: 19, name: "Cold Brew Coffee", description: "A smooth and less acidic coffee brewed with cold water over a long period and served over ice.", imageUrl: "https://d2lswn7b0fl4u2.cloudfront.net/photos/pg-jars-of-cold-brew-coffee-1627827850.jpg" },
+        { id: 20, name: "Mango Smoothie", description: "A thick and creamy drink made by blending ripe mangoes with yogurt or milk, often served chilled.", imageUrl: "https://recipesforthermomix.com/recipes-images/mango-smoothie-thermomix.jpg"}
       ],
     },
   ];

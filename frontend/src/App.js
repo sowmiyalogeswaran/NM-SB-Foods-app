@@ -1,76 +1,71 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+
 import Navbar from './components/Navbar';
 import Home from './components/HomePage';
 import Menu from './components/MenuPage';
-import Orders from './components/OrderHistory';
+import Orders from './components/Profile/OrderHistory';
 import Cart from './components/Cart';
 import ProfilePage from './components/ProfilePage';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import SignIn from './components/AuthPage'; // Assuming SignIn or AuthPage exists
+import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './contexts/CartContext';
-import { UserProvider, useUser } from './contexts/UserContext';
+import { UserProvider } from './contexts/UserContext';
+import { AuthProvider } from './components/AuthContext';
 
 function App() {
   useEffect(() => {
-    axios.get('http://localhost:5000/api/your-endpoint') // Replace with your actual backend endpoint
+    axios
+      .get('http://localhost:5000/api/your-endpoint') // Replace with your actual backend endpoint
       .then((response) => {
         // Handle the response if needed, e.g., updating state, logging data
+        console.log('Data fetched:', response.data);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       });
   }, []);
 
   return (
-    <UserProvider>
-      <Router>
-        <CartProvider>
-          <div className="App">
-            <Navbar />
-            <Routes>
-              {/* Conditionally render SignIn page only if the user is not authenticated */}
-              <Route path="/signin" element={<PublicRoute><SignIn /></PublicRoute>} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/MenuPage" element={<Menu />} />
-              <Route path="/OrderHistory" element={<Orders />} />
-              <Route path="/Cart" element={<Cart />} />
+    <AuthProvider>
+      <UserProvider>
+        <Router>
+          <CartProvider>
+            <div className="App">
+              <Navbar />
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/MenuPage" element={<Menu />} />
+                <Route path="/Cart" element={<Cart />} />
+                <Route path="/auth" element={<SignIn />} /> {/* Sign-in/Sign-up page */}
 
-              {/* Protect profile route for authenticated users */}
-              <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-            </Routes>
-          </div>
-        </CartProvider>
-      </Router>
-    </UserProvider>
+                {/* Protected Routes */}
+                <Route
+                  path="/OrderHistory"
+                  element={
+                    <ProtectedRoute>
+                      <Orders />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <ProfilePage />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </div>
+          </CartProvider>
+        </Router>
+      </UserProvider>
+    </AuthProvider>
   );
 }
-
-// PrivateRoute component to protect routes for authenticated users
-const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = useUser();
-
-  // If the user is not authenticated, redirect to SignIn page
-  if (!isAuthenticated) {
-    return <Navigate to="/signin" />;
-  }
-
-  return children; // If authenticated, render the requested component
-};
-
-// PublicRoute component to prevent access to SignIn if already authenticated
-const PublicRoute = ({ children }) => {
-  const { isAuthenticated } = useUser();
-
-  // If the user is authenticated, redirect to Profile page
-  if (isAuthenticated) {
-    return <Navigate to="/profile" />;
-  }
-
-  return children; // If not authenticated, render the SignIn page
-};
 
 export default App;
